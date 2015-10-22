@@ -7,7 +7,6 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-	"log"
 )
 
 var (
@@ -95,7 +94,7 @@ func (s *IPSet) Refresh(entries []string) error {
 	for _, entry := range entries {
 		out, err := exec.Command(ipsetPath, "add", tempName, entry, "-exist").CombinedOutput()
 		if err != nil {
-			log.Fatalf("error adding entry %s to set %s: %v (%s)", entry, tempName, err, out)
+			fmt.Errorf("error adding entry %s to set %s: %v (%s)", entry, tempName, err, out)
 		}
 	}
 	err = Swap(tempName, s.Name)
