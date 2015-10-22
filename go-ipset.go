@@ -19,6 +19,7 @@ type Params struct {
 	HashSize   int
 	MaxElem    int
 	Timeout    int
+	Create     bool
 }
 
 type IPSet struct {
@@ -56,7 +57,7 @@ func (s *IPSet) createHashSet(name string) error {
 }
 
 
-func New(name string, hashtype string, p *Params, create bool) (*IPSet, error) {
+func New(name string, hashtype string, p *Params) (*IPSet, error) {
 	if p.HashSize == 0 {
 		p.HashSize = 1024
 	}
@@ -78,7 +79,7 @@ func New(name string, hashtype string, p *Params, create bool) (*IPSet, error) {
 	}
 
 	s := IPSet{name, hashtype, p.HashFamily, p.HashSize, p.MaxElem, p.Timeout}
-	if create == true {
+	if p.Create == true {
 		err := s.createHashSet(name)
 		if err != nil {
 			return nil, err
