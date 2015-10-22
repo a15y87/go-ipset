@@ -56,7 +56,7 @@ func (s *IPSet) createHashSet(name string) error {
 }
 
 
-func New(name string, hashtype string, p *Params) (*IPSet, error) {
+func New(name string, hashtype string, p *Params, create bool) (*IPSet, error) {
 	if p.HashSize == 0 {
 		p.HashSize = 1024
 	}
@@ -78,9 +78,11 @@ func New(name string, hashtype string, p *Params) (*IPSet, error) {
 	}
 
 	s := IPSet{name, hashtype, p.HashFamily, p.HashSize, p.MaxElem, p.Timeout}
-	err := s.createHashSet(name)
-	if err != nil {
-		return nil, err
+	if create == true {
+		err := s.createHashSet(name)
+		if err != nil {
+			return nil, err
+		}
 	}
 	return &s, nil
 }
