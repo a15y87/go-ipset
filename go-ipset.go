@@ -78,10 +78,10 @@ func New(name string, hashtype string, p *Params) (*IPSet, error) {
 	}
 
 	s := IPSet{name, hashtype, p.HashFamily, p.HashSize, p.MaxElem, p.Timeout}
-//	err := s.createHashSet(name)
-//	if err != nil {
-//		return nil, err
-//	}
+	err := s.createHashSet(name)
+	if err != nil {
+		return nil, err
+	}
 	return &s, nil
 }
 
