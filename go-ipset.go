@@ -79,10 +79,10 @@ func New(name string, hashtype string, p *Params) (*IPSet, error) {
 	}
 
 	s := IPSet{name, hashtype, p.HashFamily, p.HashSize, p.MaxElem, p.Timeout}
-	err := s.createHashSet(name)
-	if err != nil {
-		return nil, err
-	}
+//	err := s.createHashSet(name)
+//	if err != nil {
+//		return nil, err
+//	}
 	return &s, nil
 }
 
@@ -161,7 +161,7 @@ func (s *IPSet) Destroy() error {
 	return nil
 }
 
-
+// Swap is used to hot swap two sets on-the-fly. Use with names of existing sets of the same type.
 func Swap(from, to string) error {
 	out, err := exec.Command(ipsetPath, "swap", from, to).Output()
 	if err != nil {
