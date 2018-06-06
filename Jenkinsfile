@@ -1,14 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
-      steps {
-        build 'Golang'
-      }
-    }
-    stage('') {
+    stage('OK') {
       steps {
         echo 'OK'
+      }
+    }
+    stage('DONE') {
+      steps {
+        echo 'DONE'
       }
     }
   }
